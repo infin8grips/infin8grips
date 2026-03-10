@@ -1,4 +1,4 @@
-import { Client, Environment } from "@square/square";
+import { Client, Environment } from "@square/square-nodejs-sdk";
 
 export default async function handler(req, res) {
   const { cart } = JSON.parse(req.body);
