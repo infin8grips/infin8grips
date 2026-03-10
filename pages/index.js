@@ -1,13 +1,15 @@
 import { useState } from "react";
 import NavBar from "../components/NavBar";
 import ItemModal from "../components/ItemModal";
+import ComingSoonModal from "../components/ComingSoonModal";
 import { BRAND } from "../theme";
 
 export default function Home() {
   const [selected, setSelected] = useState(null);
   const [cart, setCart] = useState([]);
+  const [showComingSoon, setShowComingSoon] = useState(false);
 
-  // EASY TO UPDATE PRODUCT LIST
+  // EDIT PRODUCTS HERE
   const items = [
     {
       id: "grip1",
@@ -27,21 +29,15 @@ export default function Home() {
     setSelected(null);
   };
 
-  const checkout = async () => {
-    const res = await fetch("/api/checkout", {
-      method: "POST",
-      body: JSON.stringify({ cart }),
-    });
-
-    const data = await res.json();
-    window.location.href = data.checkoutUrl;
+  const checkout = () => {
+    setShowComingSoon(true);
   };
 
   return (
     <div>
       <NavBar />
 
-      {/* HERO SECTION */}
+      {/* HERO */}
       <section className="text-center py-20 px-6">
         <h1 className="text-5xl font-bold tracking-tight">
           Elevate Your Grip.
@@ -51,7 +47,7 @@ export default function Home() {
         </p>
       </section>
 
-      {/* PRODUCT GRID */}
+      {/* PRODUCTS */}
       <div className="grid grid-cols-1 md:grid-cols-3 gap-10 px-10 pb-20">
         {items.map((item) => (
           <div
@@ -69,7 +65,7 @@ export default function Home() {
         ))}
       </div>
 
-      {/* FLOATING CHECKOUT BUTTON */}
+      {/* FLOATING CHECKOUT */}
       {cart.length > 0 && (
         <button
           onClick={checkout}
@@ -85,7 +81,10 @@ export default function Home() {
         onClose={() => setSelected(null)}
         onAdd={addToCart}
       />
+
+      {showComingSoon && (
+        <ComingSoonModal onClose={() => setShowComingSoon(false)} />
+      )}
     </div>
   );
 }
-
