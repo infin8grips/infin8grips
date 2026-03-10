@@ -9,4 +9,3 @@ export const BRAND = {
 
   font: "Inter, sans-serif"
 };
-
