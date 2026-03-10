@@ -22,7 +22,7 @@ export default async function handler(req, res) {
     {
       idempotencyKey: crypto.randomUUID(),
       order: { lineItems: items },
-      redirectUrl: "https://infin8grips.com/thanks.html"
+      redirectUrl: "https://infin8grips.com/thankyou"
     }
   );
 
